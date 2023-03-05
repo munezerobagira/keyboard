@@ -1,0 +1,66 @@
+:root {
+  --color-bg: rgba(210, 210, 210);
+  --color-text: rgba(0, 0, 0);
+  --color-text-light: rgb(112, 112, 112);
+  --color-border: 1px solid black;
+  font-size: 16px;
+}
+#keyboard {
+  background-color: var(--color-bg);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.key {
+  border: var(--color-border);
+  padding: 10px;
+  border-radius: 4px;
+  margin: 2px;
+}
+.key.active {
+  background-color: dodgerblue;
+}
+.key.size-1 {
+  font-size: 0.9rem;
+  flex: 8;
+}
+
+.key.size-2 {
+  flex: 10;
+  text-transform: uppercase;
+}
+.key.size-3 {
+  flex: 16;
+}
+.key.size-4 {
+  flex: 20;
+}
+.key.size-5 {
+  flex: 25;
+}
+.key.size-6 {
+  flex: 25;
+  padding: 20px 10px;
+}
+.key.size-7 {
+  flex: 100;
+}
+#output-container {
+  padding: 100px;
+}
+.character {
+  font-size: 1.25rem;
+  color: var(--color-text-light);
+}
+.character.error {
+  color: red;
+}
+.character.written {
+  color: var(--color-text);
+}
