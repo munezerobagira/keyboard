@@ -1,3 +1,4 @@
+//Example of the text that can write
 const targetContent = `document.addEventListener('keydown', function (event) {
   console.log(event);
   event.preventDefault();
@@ -20,6 +21,7 @@ const html = keys
   .join('');
 keyboardContainer.innerHTML = html;
 `;
+//
 const keys = [
   [
     { label: 'Esc', value: 'Esc', shift: '', fn: '', size: 'size-1', code: 'Escape' },
@@ -108,7 +110,7 @@ const keys = [
     { label: 'Ctrl', value: '', shift: '', fn: '', size: 'size-6', code: 'ControlRight' },
   ],
 ];
-// global data
+// The global state of the keyboard
 let lastCorrectIndex = 0;
 let currentIndex = 0;
 
@@ -116,12 +118,7 @@ const keyboardContainer = document.querySelector('#keyboard');
 
 //Render the keys
 const html = keys
-  .map(
-    (row) =>
-      `<div class="row">${row
-        .map((key) => `<div class="key ${key.size} key-${key.code}">${key.label}</div>`)
-        .join('')}</div>`
-  )
+  .map(row => `<div class="row">${row.map(key => `<div class="key ${key.size} key-${key.code}">${key.label}</div>`).join('')}</div>`)
   .join('');
 //Generate the te
 const totalCharacters = targetContent.split('').length;
@@ -136,12 +133,7 @@ keyboardContainer.innerHTML = html;
 // Handling the events
 document.addEventListener('keydown', function (event) {
   console.log(event);
-  if (
-    event.code.startsWith('Control') ||
-    event.code.startsWith('Shift') ||
-    event.code.startsWith('Meta') ||
-    event.code.startsWith('Alt')
-  ) {
+  if (event.code.startsWith('Control') || event.code.startsWith('Shift') || event.code.startsWith('Meta') || event.code.startsWith('Alt')) {
   } else if (event.code === 'Backspace') {
     currentIndex--;
     const targetCharacter = document.querySelector(`.character-${currentIndex}`);
