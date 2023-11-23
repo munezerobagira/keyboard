@@ -1,16 +1,25 @@
 :root {
-  --color-bg: rgba(210, 210, 210);
-  --color-text: rgba(0, 0, 0);
-  --color-text-light: rgb(112, 112, 112);
+  --color-bg: rgb(16, 16, 16);
+  --color-foreground: rgba(255, 255, 255);
+  --color-neutral: rgb(90, 90, 90);
+  --color-error: rgba(255, 100, 100);
+  --color-primary: rgb(61, 255, 126);
   --color-border: 1px solid black;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
+}
+body {
+  font-family: var(--font-family);
+  padding: 20px 100px;
+  background-color: var(--color-bg);
+  color: var(--color-foreground);
 }
 #keyboard {
   background-color: var(--color-bg);
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 30px;
 }
 .row {
   display: flex;
@@ -19,12 +28,13 @@
 }
 .key {
   border: var(--color-border);
+  background-color: var(--color-neutral);
   padding: 10px;
   border-radius: 4px;
   margin: 2px;
 }
 .key.active {
-  background-color: dodgerblue;
+  background-color: var(--color-primary);
 }
 .key.size-1 {
   font-size: 0.9rem;
@@ -56,11 +66,26 @@
 }
 .character {
   font-size: 1.25rem;
-  color: var(--color-text-light);
+  color: var(--color-neutral);
+  font-weight: 900;
 }
 .character.error {
-  color: red;
+  color: var(--color-error);
 }
 .character.written {
   color: var(--color-text);
+}
+#time-container {
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+#settings {
+  display: none;
+  position: fixed;
+  background-color: var(--color-bg);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
 }

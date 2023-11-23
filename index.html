@@ -8,10 +8,26 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
+    <button id="settings-show-button">Setting</button>
+    <button id="reset-btn">reset</button>
+    <div id="settings">
+      <textarea class="settings-textarea" style="display: none"></textarea>
+      <button class="setting-button">Settings</button>
+    </div>
+    <div id="time-container"></div>
     <div id="output-container">
       <div id="target-content"></div>
     </div>
+
     <div id="keyboard"></div>
+    <div>
+      <h2>Result</h2>
+      <div>
+        <div id="result-container">
+          <div id="result"></div>
+        </div>
+      </div>
+    </div>
     <script src="main.js"></script>
   </body>
 </html>
