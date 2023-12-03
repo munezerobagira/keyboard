@@ -1,19 +1,4 @@
-const settingsShowBtn = document.querySelector('#settings-show-button');
-const settingContainer = document.querySelector('#settings');
-const settingLoaderBtn = document.querySelector('#settings-loader');
-const settingsTextArea = document.querySelector('#settings-textarea');
-const targetContainer = document.querySelector('#target-content');
-const resetBtn = document.querySelector('#reset-btn');
-const resultContainer = document.querySelector('#result');
-const keyboardContainer = document.querySelector('#keyboard');
-
-let lastCorrectIndex = 0;
-let currentIndex = 0;
-let timeInSeconds = 200;
-let totalCharacters = 0;
-
-//
-const layoutKeys = [
+export const layoutKeys = [
   [
     { label: 'Esc', value: 'Esc', shift: '', fn: '', size: 'size-1', code: 'Escape' },
     { label: 'F1', value: 'F1', shift: '', fn: '', size: 'size-1', code: 'F1' },
@@ -101,210 +86,113 @@ const layoutKeys = [
     { label: 'Ctrl', value: '', shift: '', fn: '', size: 'size-6', code: 'ControlRight' },
   ],
 ];
-function generateRandomText(n, t) {
-  const touchTypingLayout = {
-    leftHand: [
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      'q',
-      'w',
-      'e',
-      'r',
-      't',
-      'a',
-      's',
-      'd',
-      'f',
-      'g',
-      'z',
-      'x',
-      'c',
-      'v',
-      'b',
-      '!',
-      '@',
-      '#',
-      '$',
-      '%',
-      'Q',
-      'W',
-      'E',
-      'R',
-      'T',
-      'A',
-      'S',
-      'D',
-      'F',
-      'G',
-      'Z',
-      'X',
-      'C',
-      'V',
-      'B',
-    ],
-    rightHand: [
-      '6',
-      '7',
-      '8',
-      '9',
-      '0',
-      'y',
-      'u',
-      'i',
-      'o',
-      'p',
-      'h',
-      'j',
-      'k',
-      'l',
-      ';',
-      'n',
-      'm',
-      ',',
-      '.',
-      '/',
-      '^',
-      '&',
-      '*',
-      '(',
-      ')',
-      'Y',
-      'U',
-      'I',
-      'O',
-      'P',
-      'H',
-      'J',
-      'K',
-      'L',
-      ':',
-      'N',
-      'M',
-      '<',
-      '>',
-      '?',
-    ],
-  };
-  const words = [];
-  const characters = touchTypingLayout[['leftHand', 'rightHand'][Math.round(Math.random() * 1)]];
-  const charactersLength = characters.length;
+//based on above layout suggest the size of class size in order for the keyboard to have the same length
+// size-1: 1.5rem;
+// size-2: 2.5rem;
+// size-3: 3.5rem;
+// size-4: 4.5rem;
+// size-5: 5.5rem;
+// size-6: 6.5rem;
+// size-7: 7.5rem;
 
-  for (let i = 0; i < n; i++) {
-    let word = '';
-    const wordLength = Math.floor(Math.random() * 10) + 1; // Random word length between 1 and 10 characters
-
-    for (let j = 0; j < wordLength; j++) {
-      const randomIndex = Math.floor(Math.random() * charactersLength);
-      word += characters[randomIndex];
-    }
-
-    words.push(word);
-  }
-
-  const lines = [];
-  for (let i = 0; i < t; i++) {
-    const line = words.slice((i * n) / t, ((i + 1) * n) / t).join(' ');
-    lines.push(line);
-  }
-
-  return lines.join('\n');
-}
-
-const showSpeedResult = () => {
-  const result = document.querySelector('#result');
-  const speed = Math.floor((lastCorrectIndex / totalCharacters) * 60);
-  result.innerHTML = `<h1>Speed: ${speed} WPM</h1>`;
-  return result;
-};
-const renderTime = timeInSeconds => {
-  const timeContainer = document.querySelector('#time-container');
-  let result = '';
-  let time = timeInSeconds;
-  if (time == 0) {
-    return showSpeedResult();
-  }
-  while (time != 0) {
-    result = result == '' ? (time % 60) + result : (time % 60) + ':' + result;
-    time = Math.floor(time / 60);
-  }
-  timeContainer.textContent = result;
-  return result;
-};
-let intervalId = null;
-const runTimeInterval = () => {
-  if (intervalId) clearInterval(intervalId);
-  renderTime(timeInSeconds--);
-  intervalId = setInterval(() => {
-    let time = renderTime(timeInSeconds--);
-    if (time == 0) cancelTimeInterval();
-  }, 1000);
-};
-const cancelTimeInterval = () => {
-  clearInterval(intervalId);
-};
-const showTypingContent = () => {
-  const targetContent = generateRandomText(100, 10);
-  console.log(targetContainer);
-  totalCharacters = targetContent.split('').length;
-
-  let linesTowriteHtml = targetContent
-    .split('')
-    .map((char, index) => `<span class="character character-${index}">${char}</span>`)
-    .join('');
-  targetContainer.innerHTML = linesTowriteHtml;
+export const touchTypingLayout = {
+  leftHand: [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    'q',
+    'w',
+    'e',
+    'r',
+    't',
+    'a',
+    's',
+    'd',
+    'f',
+    'g',
+    'z',
+    'x',
+    'c',
+    'v',
+    'b',
+    '!',
+    '@',
+    '#',
+    '$',
+    '%',
+    'Q',
+    'W',
+    'E',
+    'R',
+    'T',
+    'A',
+    'S',
+    'D',
+    'F',
+    'G',
+    'Z',
+    'X',
+    'C',
+    'V',
+    'B',
+  ],
+  rightHand: [
+    '6',
+    '7',
+    '8',
+    '9',
+    '0',
+    'y',
+    'u',
+    'i',
+    'o',
+    'p',
+    'h',
+    'j',
+    'k',
+    'l',
+    ';',
+    'n',
+    'm',
+    ',',
+    '.',
+    '/',
+    '^',
+    '&',
+    '*',
+    '(',
+    ')',
+    'Y',
+    'U',
+    'I',
+    'O',
+    'P',
+    'H',
+    'J',
+    'K',
+    'L',
+    ':',
+    'N',
+    'M',
+    '<',
+    '>',
+    '?',
+  ],
 };
 
-//Render the keys
-const keyboardLayoutDesignhtml = layoutKeys
-  .map(row => `<div class="row">${row.map(key => `<div class="key ${key.size} key-${key.code}">${key.label}</div>`).join('')}</div>`)
-  .join('');
-keyboardContainer.innerHTML = keyboardLayoutDesignhtml;
+// creating size that each one add up to same row size
+// row 1:  size-1=10 the size for first row would be 14*10=140
+// row 2:  size-2=10, size-3= 20 the size for first row would be 12*10=120
+//
 
-// Handling the events
-document.addEventListener('keydown', function (event) {
-  if (currentIndex == -1) currentIndex = 0;
-  const targetCharacter = document.querySelector(`.character-${currentIndex}`);
-  console.log(totalCharacters, currentIndex);
-  if (event.code.startsWith('Control') || event.code.startsWith('Shift') || event.code.startsWith('Meta') || event.code.startsWith('Alt')) {
-  } else if (event.code === 'Backspace') {
-    targetCharacter.classList.remove('written');
-    targetCharacter.classList.remove('error');
-    currentIndex--;
-  } else {
-    if (targetCharacter.innerHTML == event.key) {
-      targetCharacter.classList.add('written');
-      currentIndex++;
-      lastCorrectIndex++;
-    } else {
-      currentIndex++;
-      targetCharacter.classList.add('error');
-    }
-  }
-  event.preventDefault();
-  const pressedKey = document.querySelector(`.key-${event.code}`);
-  pressedKey.classList.add('active');
-});
-document.addEventListener('keyup', function (event) {
-  event.preventDefault();
-  const pressedKey = document.querySelector(`.key-${event.code}`);
-  pressedKey.classList.remove('active');
-});
-
-// settingLoaderBtn.addEventListener('click', function (event) {
-//   settingsTextArea.style.display = 'block';
-// });
-settingsShowBtn.addEventListener('click', function (event) {
-  settingContainer.style.display = 'block';
-});
-resetBtn.addEventListener('click', function (event) {
-  currentIndex = 0;
-  lastCorrectIndex = 0;
-  timeInSeconds = 200;
-  showTypingContent();
-  runTimeInterval();
-});
-showTypingContent();
-runTimeInterval();
+export const sizes = {
+  'size-1': 1.5,
+  'size-2': 1.4,
+  'size-3': 2.6,
+  'size-4': 3.85,
+  'size-5': 3.85,
+  'size-6': 4.2,
+  'size-7': 6,
+};
